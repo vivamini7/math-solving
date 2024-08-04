@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:temu_qanda/screens/service_select_screen.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -25,6 +26,13 @@ class _UploadScreenState extends State<UploadScreen> {
         // _resultImageUrl = ''; // 이전 결과 이미지 URL 초기화
       });
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ServiceSelectScreen(),
+      ),
+    );
   }
 
   @override
