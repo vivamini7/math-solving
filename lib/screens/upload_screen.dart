@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:temu_qanda/screens/upload_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class UploadScreen extends StatelessWidget {
+  const UploadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange,
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 30,
@@ -18,16 +20,16 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Temu에서 산',
+                '문제 이미지를',
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const Text(
-                'QANDA',
+                '올려주세요!',
                 style: TextStyle(
-                  fontSize: 70,
+                  fontSize: 50,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -35,21 +37,11 @@ class HomeScreen extends StatelessWidget {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UploadScreen(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  '시작!',
-                  style: TextStyle(
-                    fontSize: 70,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
+                onPressed: () {},
+                child: const Icon(
+                  Icons.file_upload_outlined,
+                  size: 100,
+                  color: Colors.black,
                 ),
               ),
             ],
