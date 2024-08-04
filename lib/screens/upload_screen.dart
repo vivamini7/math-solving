@@ -1,7 +1,31 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
-class UploadScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
+
+  @override
+  State<UploadScreen> createState() => _UploadScreenState();
+}
+
+class _UploadScreenState extends State<UploadScreen> {
+  Uint8List? _imageBytes;
+  // String _resultImageUrl = '';
+
+  Future<void> uploadImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _imageBytes = bytes;
+        // _resultImageUrl = ''; // 이전 결과 이미지 URL 초기화
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +61,7 @@ class UploadScreen extends StatelessWidget {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: uploadImage,
                 child: const Icon(
                   Icons.file_upload_outlined,
                   size: 100,
