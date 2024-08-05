@@ -19,7 +19,16 @@ class ResultScreen extends StatelessWidget {
           vertical: 20,
         ),
         child: Center(
-          child: Image.network(data.resultImageUrl),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.memory(data.imageBytes),
+              const SizedBox(
+                height: 50,
+              ),
+              Image.network(data.resultImageUrl),
+            ],
+          ),
         ),
       ),
     );

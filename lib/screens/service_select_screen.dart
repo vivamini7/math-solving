@@ -72,7 +72,6 @@ class _ServiceSelectScreenState extends State<ServiceSelectScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image.memory(data.imageBytes), // for test
               const Text(
                 '이용할 서비스를',
                 style: TextStyle(
