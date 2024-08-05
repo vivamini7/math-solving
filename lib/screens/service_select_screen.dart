@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:temu_qanda/models/data_model.dart';
 
 class ServiceSelectScreen extends StatelessWidget {
-  const ServiceSelectScreen({super.key});
+  final DataModel data;
+
+  const ServiceSelectScreen({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,7 @@ class ServiceSelectScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Image.memory(data.imageBytes), // for test
               const Text(
                 '이용할 서비스를',
                 style: TextStyle(
