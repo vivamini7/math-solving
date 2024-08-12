@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:temu_qanda/models/data_model.dart';
+import 'package:temu_qanda/widgets/latex_text_widget.dart';
 
 class ResultScreen extends StatefulWidget {
   final DataModel data;
@@ -125,12 +126,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(
-                            widget.data.similarProblem,
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
+                          LaTeXText(widget.data.similarProblem),
                         ],
                       ),
                     ),
