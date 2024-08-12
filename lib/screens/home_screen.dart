@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 30,
@@ -17,20 +17,21 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Temu에서 산',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Text(
-                'QANDA',
-                style: TextStyle(
-                  fontSize: 70,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              Image.asset('assets/logo.png'),
+              // const Text(
+              //   'Temu에서 산',
+              //   style: TextStyle(
+              //     fontSize: 50,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
+              // const Text(
+              //   'QANDA',
+              //   style: TextStyle(
+              //     fontSize: 70,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
               const SizedBox(
                 height: 50,
               ),
