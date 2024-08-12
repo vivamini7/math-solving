@@ -2,10 +2,11 @@ import 'dart:typed_data';
 
 class DataModel {
   final Uint8List imageBytes;
-  String resultImageUrl;
+  String chapter = '';
+  String similarProblem = '';
+  String explanation = '';
 
   DataModel({
     required this.imageBytes,
-    required this.resultImageUrl,
   });
 }

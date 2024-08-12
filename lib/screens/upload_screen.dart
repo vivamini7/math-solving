@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:temu_qanda/models/data_model.dart';
-import 'package:temu_qanda/screens/service_select_screen.dart';
+import 'package:temu_qanda/screens/result_screen.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -14,7 +14,6 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   Uint8List? imageBytes;
-  String resultImageUrl = '';
 
   Future<void> uploadImage() async {
     final picker = ImagePicker();
@@ -24,18 +23,17 @@ class _UploadScreenState extends State<UploadScreen> {
       final bytes = await pickedFile.readAsBytes();
       setState(() {
         imageBytes = bytes;
-        resultImageUrl = ''; // 이전 결과 이미지 URL 초기화
       });
 
       DataModel data = DataModel(
         imageBytes: imageBytes!,
-        resultImageUrl: resultImageUrl,
       );
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ServiceSelectScreen(data: data),
+          fullscreenDialog: true,
+          builder: (context) => ResultScreen(data: data),
         ),
       );
     }
