@@ -1,0 +1,18 @@
+--index-url https://mirrors.aliyun.com/pypi/simple
+--extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple
+--extra-index-url https://pypi.org/simple
+
+click
+tqdm
+numpy
+torch
+torchvision
+pillow>=5.3.0
+opencv-python
+cnstd>=1.2.4.2
+cnocr[ort-cpu]>=2.3.0.2
+transformers>=4.37.0
+optimum[onnxruntime]
+easyocr
+pymupdf>=1.20.0
+pyspellchecker

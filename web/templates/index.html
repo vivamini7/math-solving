@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text</title>
+    <script type="text/javascript">
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+            tags: 'ams'
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            processHtmlClass: 'arithmatex'
+        }
+    };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+    <style>
+        .arithmatex {
+            white-space: pre-wrap;
+        }
+
+        /* 마크다운 스타일 헤더 */
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 1em;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0.3em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 1em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 0.8em;
+        }
+
+        /* 마크다운 스타일 강조 */
+        strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>수학 문제를 올려주세요</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    {% if chapter %}
+    <h2>단원</h2>
+    <p>{{ chapter }}</p>
+    {% endif %}
+
+    {% if similar_problem %}
+    <h2>유사 문제 추천</h2>
+    <p class="arithmatex">{{ similar_problem | replace("\n", "<br>") | safe }}</p>
+    {% endif %}
+
+    {% if explanation %}
+    <h2>풀이</h2>
+    <p class="arithmatex">{{ explanation | replace("\n", "<br>") | safe }}</p>
+    {% endif %}
+</body>
+</html>
