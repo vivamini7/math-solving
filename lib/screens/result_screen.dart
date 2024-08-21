@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:temu_qanda/models/data_model.dart';
-import 'package:temu_qanda/widgets/latex_text_widget.dart';
+import 'package:temu_qanda/widgets/explanation_text_widget.dart';
+import 'package:temu_qanda/widgets/similar_problem_text_widget.dart';
 
 class ResultScreen extends StatefulWidget {
   final DataModel data;
@@ -88,9 +89,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       child: ListView(
                         children: [
                           const Text(
-                            '단원',
+                            '[단원]',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -104,29 +105,24 @@ class _ResultScreenState extends State<ResultScreen> {
                             height: 30,
                           ),
                           const Text(
-                            '문제 해설',
+                            '[문제 해설]',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(
-                            widget.data.explanation,
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
+                          ExplanationText(widget.data.explanation),
                           const SizedBox(
                             height: 30,
                           ),
                           const Text(
-                            '유사 문제',
+                            '[유사 문제]',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          LaTeXText(widget.data.similarProblem),
+                          SimilarProblemText(widget.data.similarProblem),
                         ],
                       ),
                     ),

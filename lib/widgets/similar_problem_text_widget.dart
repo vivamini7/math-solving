@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
-class LaTeXText extends StatelessWidget {
+class SimilarProblemText extends StatelessWidget {
   final String text;
 
-  const LaTeXText(this.text, {super.key});
+  const SimilarProblemText(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,7 @@ class LaTeXText extends StatelessWidget {
       text: TextSpan(
         children: parts.map((part) {
           if (part.contains(r'$')) {
-            final latex =
-                part.substring(1, part.length - 1); // Remove $ characters
+            final latex = part.substring(1, part.length - 1);
             return TextSpan(
               text: '',
               children: [
