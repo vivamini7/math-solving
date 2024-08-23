@@ -71,6 +71,7 @@ class _ResultScreenState extends State<ResultScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: _isLoading ? false : true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
