@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:temu_qanda/models/data_model.dart';
-import 'package:temu_qanda/widgets/explanation_text_widget.dart';
-import 'package:temu_qanda/widgets/similar_problem_text_widget.dart';
+import 'package:temu_qanda/widgets/latex_text_widget.dart';
 
 class ResultScreen extends StatefulWidget {
   final DataModel data;
@@ -111,7 +110,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          ExplanationText(widget.data.explanation),
+                          LaTeXText(widget.data.explanation),
                           const SizedBox(
                             height: 30,
                           ),
@@ -122,7 +121,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SimilarProblemText(widget.data.similarProblem),
+                          LaTeXText(widget.data.similarProblem),
                         ],
                       ),
                     ),

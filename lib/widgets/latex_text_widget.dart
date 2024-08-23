@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
-class ExplanationText extends StatelessWidget {
+class LaTeXText extends StatelessWidget {
   final String text;
 
-  const ExplanationText(this.text, {super.key});
+  const LaTeXText(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,23 @@ class ExplanationText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: parts.map((part) {
+          // LaTeX 인라인 수식 처리 '$$'
+          if (part.contains(r'$')) {
+            final latex = part.substring(1, part.length - 1);
+            return TextSpan(
+              text: '',
+              children: [
+                WidgetSpan(
+                  child: Math.tex(
+                    latex,
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            );
+          }
           // LaTeX 인라인 수식 처리 '\(\)'
-          if (part.startsWith('\\(') && part.endsWith('\\)')) {
+          else if (part.startsWith('\\(') && part.endsWith('\\)')) {
             final latex = part.substring(2, part.length - 2);
             return TextSpan(
               text: '',
@@ -78,8 +93,10 @@ class ExplanationText extends StatelessWidget {
 
   List<String> _parseLatex(String text) {
     final regex = RegExp(
-        r'\\\[(.*?)\\\]|\\\((.*?)\\\)|\*\*(.*?)\*\*|###(.*?)\n|####(.*?)\n',
-        dotAll: true);
+      r'\\\[(.*?)\\\]|\$.*?\$|\\\((.*?)\\\)|\*\*(.*?)\*\*|###(.*?)\n|####(.*?)\n',
+      dotAll: true,
+    );
+
     final parts = <String>[];
     var lastIndex = 0;
 
@@ -92,7 +109,9 @@ class ExplanationText extends StatelessWidget {
 
       if (fullMatch.startsWith('\\[') || fullMatch.startsWith('\\(')) {
         final latex = match.group(1) ?? match.group(2)!;
-        parts.add(fullMatch.replaceFirst(latex, latex));
+        parts.add(fullMatch);
+      } else if (fullMatch.startsWith('\$')) {
+        parts.add(fullMatch);
       } else if (fullMatch.startsWith('**')) {
         parts.add(fullMatch);
       } else if (fullMatch.startsWith('####')) {
