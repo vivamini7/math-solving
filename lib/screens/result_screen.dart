@@ -57,9 +57,11 @@ class _ResultScreenState extends State<ResultScreen> {
     } catch (e) {
       print('Error: $e');
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
