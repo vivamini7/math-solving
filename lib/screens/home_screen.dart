@@ -17,21 +17,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/logo.png'),
-              // const Text(
-              //   'Temu에서 산',
-              //   style: TextStyle(
-              //     fontSize: 50,
-              //     fontWeight: FontWeight.w600,
-              //   ),
-              // ),
-              // const Text(
-              //   'QANDA',
-              //   style: TextStyle(
-              //     fontSize: 70,
-              //     fontWeight: FontWeight.w600,
-              //   ),
-              // ),
+              Image.asset(
+                'assets/logo.png',
+                width: 400.0,
+                height: 400.0,
+              ),
               const SizedBox(
                 height: 50,
               ),
