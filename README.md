@@ -1,6 +1,9 @@
 # 🔥 **2024-1학기 Prometheus 5기 Project**
 
 ## **테무에서 산 콴다**
+
+![Overview](https://github.com/vivamini7/math-solving/blob/main/images/overview.gif)
+
 이 프로젝트는 수학 문제 풀이 공부 서비스입니다. 사용자가 수학 문제 사진을 업로드하면, 해당 문제의 단원을 파악하고 상세한 풀이를 제공 합니다. 이를 통해 단순한 해설지 제공을 넘어, 문제 풀이 접근 방식을 이해하는 데 도움을 줍니다. 또한, 유사 문제를 추천하여 학습자가 취약
 한 부분을 반복 학습할 수 있도록 돕습니다.
 
@@ -58,12 +61,54 @@
 
 OpenAI API를 활용하여 GPT-4o를 사용해 문제 이미지에서 latex 기호를 활용한 문제 text를 추출하여 학습에 사용하였습니다.
 
+## 결과 예시
+업로드한 문제 이미지에 대한 단원 예측, 해설, 유사 문제 추천 텍스트를 출력합니다.
+
+![Result1](https://github.com/vivamini7/math-solving/blob/main/images/result1.png)
+![Result2](https://github.com/vivamini7/math-solving/blob/main/images/result2.png)
 
 ## 실행 방법
 이 프로젝트를 로컬 환경에서 실행하려면 다음 단계를 따라주세요.
 
-## 설치 및 의존성
+### Clone this repository
+```bash
+git clone https://github.com/vivamini7/math-solving.git
+cd math-solving
+```
 
+### Install requirements
+```bash
+pip install -r Pix2Text/requirements.txt
+pip install -r MACM/requirements.txt
+pip install -r web/requirements.txt
+```
+### Run Flask API server
+```bash
+python web/app.py
+```
+
+### Run Flutter app
+```bash
+cd temu_qanda
+flutter run -d chrome
+```
+
+## 설치 및 의존성
+### Install Flutter SDK
+
+Flutter 프로젝트를 실행하기 위한 환경을 설정합니다. Chrome을 시뮬레이터로 사용하는 방법을 설명합니다.
+
+1. **Flutter 설치**: Flutter SDK를 설치합니다. [[설치 방법]](https://docs.flutter.dev/get-started/install)
+
+2. **Flutter 환경 설정**: Flutter 설치와 관련된 설정을 검사하고, 필요한 설치가 완료되었는지 확인합니다.
+```bash
+flutter doctor
+```
+
+3. **Chrome 시뮬레이터 실행**: Chrome이 설치되어 있다면 flutter 프로젝트를 실행합니다.
+```bash
+flutter run -d chrome
+```
 
 ## 참조 자료
 - (https://www.sciencedirect.com/science/article/abs/pii/S0031320319300263?fr=RR-2&ref=pdf_download&rr=8b77fb950b5b30dc)
