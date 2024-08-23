@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request, jsonify
 import os
-import glob
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-import re
 import torch
 import torch.nn as nn
 from transformers import AutoModel, AutoTokenizer
+import glob
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 import sys
 from openai import OpenAI
 
@@ -14,36 +14,16 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../P
 
 from pix2text import Pix2Text
 
-
 device = torch.device('cpu')
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
-
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    extracted_text = ""
-    chapter = ""
-    similar_problem = ""
-    explanation = ""
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            return redirect(request.url)
-        if file:
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(filepath)
-            problem = image2text(filepath)
-            os.remove(filepath)
-            chapter = text2chapter(problem)
-            similar_problem = text2sim(problem)
-            explanation = text2explanation(problem)
-    return render_template('index.html', chapter=chapter, similar_problem=similar_problem, explanation=explanation)
 
 p2t = Pix2Text()
 
@@ -180,11 +160,37 @@ def text2sim(problem):
     input_text = problem
     similar_indices = find_similar_questions(input_text, vectorizer, tfidf_matrix)
     formatted_questions = []
-    for idx in similar_indices:
+    for idx in similar_indices[:2]:
         formatted_text = questions[idx]
         formatted_questions.append(formatted_text)
-        break
-    return formatted_questions[0]
+    return formatted_questions[1]
+
+@app.route('/process_image', methods=['POST'])
+def process_image():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'}), 400
+
+    file = request.files['image']
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(filepath)
+
+    try:
+        # 이미지에서 텍스트 추출
+        problem = image2text(filepath)
+
+        # 텍스트를 바탕으로 챕터, 유사 문제, 문제 설명 생성
+        chapter = text2chapter(problem)
+        similar_problem = text2sim(problem)
+        explanation = text2explanation(problem)
+
+        # 결과를 JSON으로 반환
+        return jsonify({
+            'chapter': chapter,
+            'similar_problem': similar_problem,
+            'explanation': explanation
+        })
+    finally:
+        os.remove(filepath) 
 
 if __name__ == '__main__':
     app.run(debug=True)
